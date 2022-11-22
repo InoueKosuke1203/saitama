@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>テストマップ(埼玉)</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+
+    #fly {
+        display: inline-block;
+        position: relative;
+        width: 100px;
+        height: 100px;
+		top: 200px;
+		left: 35px;
+        padding: 10px;
+        border: 3px solid #46b2bb;
+        border-radius: 100%;
+        -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+        font-size: 15px;
+        font-weight: 100;
+        color: #fff;
+        background: #46b2bb;
+    }
+
+    #fly2 {
+        display: inline-block;
+        position: relative;
+        width: 100px;
+        height: 100px;
+		top: 200px;
+		left: 35px;
+        padding: 10px;
+        border: 3px solid #46b2bb;
+        border-radius: 100%;
+        -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+        font-size: 15px;
+        font-weight: 100;
+        color: #46b2bb;
+        background: #fff;        
+    }
+
+    #fly3 {
+        display: inline-block;
+        position: relative;
+        width: 100px;
+        height: 100px;
+		top: 200px;
+		left: 35px;
+        padding: 10px;
+        border: 3px solid #f9ad9b;
+        border-radius: 100%;
+        -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+        font-size: 15px;
+        font-weight: 100;
+        color: #fff;
+        background: #f9ad9b;
+    }
+
+    /* 経路表示用のボタン */
+	.btn-control {
+		font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+		background-color: #359495;
+		color: #fff;
+		position: absolute;
+		top: 20px;
+		left: 50%;
+		z-index: 1;
+		border: none;
+		width: 200px;
+		margin-left: -100px;
+		display: block;
+		cursor: pointer;
+		padding: 10px 20px;
+		border-radius: 3px;
+	}
+
+	/* 画像アイコンと説明用のスタイル */
+	#marker-tamachi {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEW7eqZ59JMA6mx3vfVZg7n41Z10OCAqaWt8uVthsUO0wDAkETS1yqxficaZ0n9XgqI1ySgCJDykp-uACb7Z47IPM66BBuOa6vddgk0cOIxOghv7lopJDMBb2aAjwcyeK46b20RuvA0l2LDwXVO4eoNG=s893-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+	#marker-hospital {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEVZL7XyIhbvRN6alIU9RJgEwb_6DISbME2a2zlW7Tqi1kzq_pRbp2jodxvzXO4AI6IDXUxo1lRy5TyH9yzzo5qBdLq0JAqLYhfryaFKUHQAjoxCr6imc6DfvNJfTmmxlbBTqxeJ6KIX9vmgmYEWxVhl=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+	#marker-park {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEWX41O5CGemJeMukWOxUgUqO7dpkMbi2ZwMm07XV8yciwa7t9lEfcCZpTVywHcfOAnuUmo_rkRmMbcRHsQCZvt9rrWmyVw9OI5wlmWyfnTyHq6CSm9Yj9WyWjIMjNW1bj6V5qHnR0V3vz026VKX8pCm=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-left {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEW4TxMHvNa1Zan1AF3I-1fbFPA_NO-8P9Xp2UrQlBoT7zipkVnaFqsb62ya04C63FJVdfTMZWkPt1oXCsokN6qjQZC6BbLlocjDc-QEI7_hnvX3UxEiN0mXpWFiHtvgkjNyNaDVXGmj8ZZmkeyPZE-g=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-right {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEX4ILCARry81KphmCT4zYS2pnW3bWBTPjMjwqc-sLzIwM9hgdLjDpxXObY6CGKGhmXeIA32a9Do1Vk096h_UtXzpJQFSXoIn7ncjduqTjFTWTfUlfRnce00MmrTFsMkotVdwWy1lZixt6U7EeTuiwRB=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-T-right {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEWzwcMZYqQ6Yd0afBo0pdUbIKJKHy32edEJ8VKfqxog18i-raz2lk7SUau028GdfmLckG3k4OrMdaWCK3ZjyFfxVTbG950NYXWHWb_LBHuKn20hqrLtDNriu-SjcvdoprFmGBrhULFT3uLcg0tbeyFu=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-T-left {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEXkm7dAj-XRje9ni5_NkIHTcj9tvPY6fmwIuka6rugArzGtI-SPFhy3k9jS1BPlRaz-WqaleUqAsqLgJIEat8FP1P92UUgj_-2rlhBpOWvxjM7Ct8wFTY2aeWnNT2zWAYN8px8c7uHf8ZnCLWOEF6ls=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-next-left {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEWt_UDbxQ621FKtzHfEvtlA0dRcniUA7_RYL3IgbUpDYA6KexTcp7z5LXfqoPjap25e90AgPz82YQS8Rsbjp0ODMYnjU0P6B7Q7tRcFMMNQsUcD8zKaLOs9svjE-Uw0B8lrZRoIHFjjrRHJQ8JHJ34v=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-cross-left {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEV2XhJA6xfRO4fz0B1-g2LvyekFxz0PoGhPV3O2sUTl3BTl1wEPn2KQj6TNWRyOJo31nSovFNU3RZJcNKXIFdwfw3xsOspdKsAPagHxzrsRRAEiTx3OG-zCWUa8AkGDLKu5aH-jOYUWVwk_z6gx8W_G=s625-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+	.mapboxgl-popup {
+		max-width: 200px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	}
+
+	.text-image {
+		position: relative;
+		width: 330px;
+		height: 300px;
+		top: 20px;
+		left: 20px;
+	}
+	.text-image img {
+		position: absolute;
+		width: 100%;
+		height: auto;
+	}
+	.text-image .background {
+		top: 0;
+		left: 0;
+	}
+	.text-image .picture {
+		width: 150px;
+		height: 150px;
+		top: 15px;
+		left: 15px;
+	}
+	.text-image p {
+		position: absolute;
+		top: 18%;
+		left: 53%;
+		font-size: 20px;
+		color: #359495;
+	}
+
+</style>
+<div id="map"></div>
+<div class="text-image">
+	<img src="https://lh3.googleusercontent.com/pw/AL9nZEUjJ9lg4bnpOQAMpSP62NaJlL8taAAoDXZKbvX8GveIm2sWNu6P__ET8PcHl64KcFS3mDpdi0Rux_uwywWePYiFkcop21tm2jt1EGwIUy8l41v0F-7nMTvVKctuInxRT-asTg4aBLcDhKjGTGTLbt2B=w1648-h893-no?authuser=0" alt="" class="background">
+	<img id="picture" src="https://lh3.googleusercontent.com/pw/AL9nZEUNrQwQG1_59-dKMoHLoMVI5k0v2NY2CWT1H0RY_mhgUO3FT1i8MyV0PR8ZOCzecpCjnBXOjrDeO2tNlo1q6e9t6-ifMJJlbnBvN6Dygmn9IFBhECUHoEE6uUy89Utz1UF0ZOBwIZTmFlQOxiCTwEao=w1920-h774-no?authuser=0" alt="" class="picture">
+	<p id="target">目印</p>
+</div>
+<br>
+<button id="fly3">出発地点</button>
+<button id="fly2">◃前の目印</button>
+<button id="fly">次の目印▹</button>
+<!-- <button id="zoomto" class="btn-control">経路全体表示</button> -->
+<script>
+
+    // const aaa = [139.6220376, 35.8788746];
+    // const bbb = [139.6181326, 35.8901640];
+    // const ccc = [139.6212518, 35.8910195];
+
+    const tamachi = [139.737018, 35.69555];
+	const kaidan = [139.737705, 35.696267];
+	const gosaro = [139.739961, 35.694756];
+    const dentist = [139.73670662292648, 35.69573591349243];
+
+    const a = [139.7378087, 35.6964356];
+    const b = [139.7374621, 35.6967884];
+    const c = [139.7378161, 35.6969210];
+    const d = [139.7373088, 35.6978996];
+    const e = [139.7377293, 35.6980499];
+    const f = [139.7375747, 35.6983696];
+    const g = [139.7379744, 35.6986767];
+    const h = [139.7374768, 35.6997721];
+    const park = [139.7370625810891, 35.69943941120695];
+
+	const urlTamachi = 'https://www.hosei.ac.jp/application/files/1315/7753/1438/co_190122_NAG9873.jpg'
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoiaW5vdWVrb3N1a2UiLCJhIjoiY2w1dXVjMXR0MDBoZTNjcHNneDBoY2p1ayJ9.QOyj-eLyQbQZ_2A2502t1A';
+    
+
+    // 経路全体表示１
+	const geojson = {
+		'type': 'FeatureCollection',
+		'features': [
+			{
+				'type': 'Feature',
+				'geometry': {
+					'type': 'LineString',
+					'properties': {},
+					'coordinates': [
+						[ 139.7370592, 35.6994275, 0.0 ], [ 139.73707, 35.69945, 0.0 ], [ 139.73707, 35.69946, 0.0 ], [ 139.73707, 35.69947, 0.0 ], [ 139.73707, 35.69948, 0.0 ], [ 139.73706, 35.69949, 0.0 ], [ 139.73706, 35.69951, 0.0 ], [ 139.73705, 35.69952, 0.0 ], [ 139.73704, 35.69952, 0.0 ], [ 139.73704, 35.69953, 0.0 ], [ 139.73703, 35.69953, 0.0 ], [ 139.73702, 35.69953, 0.0 ], [ 139.737, 35.69953, 0.0 ], [ 139.73697, 35.69953, 0.0 ], [ 139.736970899999989, 35.6995344, 0.0 ], [ 139.737, 35.69957, 0.0 ], [ 139.737, 35.69959, 0.0 ], [ 139.736995, 35.6995858, 0.0 ], [ 139.73704, 35.6996, 0.0 ], [ 139.73724, 35.69967, 0.0 ], [ 139.73744, 35.69974, 0.0 ], [ 139.7374437, 35.6997354, 0.0 ], [ 139.73758, 35.69945, 0.0 ], [ 139.73759, 35.69944, 0.0 ], [ 139.73765, 35.6993, 0.0 ], [ 139.73767, 35.69925, 0.0 ], [ 139.73774, 35.69909, 0.0 ], [ 139.73776, 35.69905, 0.0 ], [ 139.73784, 35.69888, 0.0 ], [ 139.73785, 35.69886, 0.0 ], [ 139.73794, 35.69868, 0.0 ], [ 139.7379369, 35.6986751, 0.0 ], [ 139.73783, 35.69864, 0.0 ], [ 139.73782, 35.69863, 0.0 ], [ 139.73781, 35.69863, 0.0 ], [ 139.7378, 35.69862, 0.0 ], [ 139.7378, 35.69861, 0.0 ], [ 139.73779, 35.6986, 0.0 ], [ 139.73779, 35.69859, 0.0 ], [ 139.73779, 35.69858, 0.0 ], [ 139.73779, 35.69855, 0.0 ], [ 139.73779, 35.69854, 0.0 ], [ 139.73779, 35.69853, 0.0 ], [ 139.73778, 35.69851, 0.0 ], [ 139.73777, 35.6985, 0.0 ], [ 139.73776, 35.69848, 0.0 ], [ 139.73774, 35.69847, 0.0 ], [ 139.73771, 35.69846, 0.0 ], [ 139.73769, 35.69845, 0.0 ], [ 139.73762, 35.69842, 0.0 ], [ 139.7376, 35.69841, 0.0 ], [ 139.73758, 35.69839, 0.0 ], [ 139.73757, 35.69838, 0.0 ], [ 139.73756, 35.69837, 0.0 ], [ 139.73756, 35.69836, 0.0 ], [ 139.73756, 35.69835, 0.0 ], [ 139.73756, 35.69834, 0.0 ], [ 139.73757, 35.69832, 0.0 ], [ 139.7377, 35.69807, 0.0 ], [ 139.737695800000012, 35.6980733, 0.0 ], [ 139.73729, 35.69793, 0.0 ], [ 139.73727, 35.69792, 0.0 ], [ 139.737267300000013, 35.6979242, 0.0 ], [ 139.7373, 35.69785, 0.0 ], [ 139.73762, 35.69722, 0.0 ], [ 139.73765, 35.69716, 0.0 ], [ 139.73769, 35.69711, 0.0 ], [ 139.73778, 35.69693, 0.0 ], [ 139.7377836, 35.6969311, 0.0 ], [ 139.73776, 35.69692, 0.0 ], [ 139.73768, 35.69689, 0.0 ], [ 139.73747, 35.69682, 0.0 ], [ 139.7374709, 35.6968239, 0.0 ], [ 139.73749, 35.69679, 0.0 ], [ 139.73755, 35.69673, 0.0 ], [ 139.73759, 35.69668, 0.0 ], [ 139.73772, 35.69655, 0.0 ], [ 139.73776, 35.69651, 0.0 ], [ 139.73778, 35.69648, 0.0 ], [ 139.73783, 35.69643, 0.0 ], [ 139.73782, 35.69641, 0.0 ], [ 139.73776, 35.69636, 0.0 ], [ 139.73767, 35.6963, 0.0 ], [ 139.73763, 35.69628, 0.0 ], [ 139.73744, 35.69616, 0.0 ], [ 139.737443899999988, 35.6961559, 0.0 ], [ 139.7374, 35.69613, 0.0 ], [ 139.73721, 35.69599, 0.0 ], [ 139.73707, 35.69589, 0.0 ], [ 139.73703, 35.69586, 0.0 ], [ 139.737, 35.69583, 0.0 ], [ 139.73695, 35.69579, 0.0 ], [ 139.7369, 35.69575, 0.0 ], [ 139.73689, 35.69574, 0.0 ], [ 139.736891899999989, 35.6957414, 0.0 ]
+					]
+				}
+			}
+		]
+	};
+    
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/inouekosuke/cl96xiif7000115qliw1b7tfr',
+        center: tamachi,
+        zoom: 18,
+        padding: 40,
+		pitch: 20,
+		bearing: 30
+    });
+
+    // 経路全体表示２
+	map.on('load', () => {
+		map.addSource('LineString', {
+			'type': 'geojson',
+			'data': geojson
+		});
+		map.addLayer({
+			'id': 'LineString',
+			'type': 'line',
+			'source': 'LineString',
+			'layout': {
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+			'paint': {
+				'line-color': '#0878FF',
+				'line-width': 16,
+				'line-opacity': 0.7,
+			}
+		});
+		
+		// document.getElementById('zoomto').addEventListener('click', () => {
+		// 	// Geographic coordinates of the LineString
+		// 	const coordinates = geojson.features[0].geometry.coordinates;
+		
+		// 	// Create a 'LngLatBounds' with both corners at the first coordinate.
+		// 	const bounds = new mapboxgl.LngLatBounds(
+		// 		coordinates[0],
+		// 		coordinates[0]
+		// 	);
+		
+		// 	// Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+		// 	for (const coord of coordinates) {
+		// 		bounds.extend(coord);
+		// 	}
+		
+		// 	map.fitBounds(bounds, {
+		// 		padding: 20,
+		// 		pitch: 0,
+		// 		bearing: 0,
+        //         zoom: 16.2
+		// 	});
+		// });
+	})
+
+    // 目印移動
+    var n = 0;
+    document.getElementById('fly').addEventListener('click', () => {
+        if(n == 0){
+            map.flyTo({
+            center: tamachi,
+            zoom: 18,
+            padding: 40,
+		    pitch: 45,
+		    bearing: 100,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1,
+			document.getElementById('target').textContent = '出発'
+			document.getElementById('picture').src = urlTamachi
+        }
+        else if(n == 1){
+            map.flyTo({
+            center: a,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 50,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1,
+			document.getElementById('target').textContent = '道なり左折'
+        }
+        else if(n == 2){
+            map.flyTo({
+            center: b,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -35,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '突き当り右'
+        }
+        else if(n == 3){
+            map.flyTo({
+            center: c,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 70,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '次の曲がり角左'
+        }
+        else if(n == 4){
+            map.flyTo({
+            center: d,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -20,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '突き当り右'
+        }
+        else if(n == 5){
+            map.flyTo({
+            center: e,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 70,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '次の曲がり角左'
+        }
+        else if(n == 6){
+            map.flyTo({
+            center: f,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -20,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '道なり右折'
+        }
+        else if(n == 7){
+            map.flyTo({
+            center: g,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 70,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '突き当り左'
+        }
+        else if(n == 8){
+            map.flyTo({
+            center: h,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -20,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '十字路左'
+        }
+        else if(n == 9){
+            map.flyTo({
+            center: park,
+            zoom: 18,
+            padding: 40,
+		    pitch: 45,
+		    bearing: 190,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n + 1
+			document.getElementById('target').textContent = '中町公園'
+        }
+    });
+
+    document.getElementById('fly2').addEventListener('click', () => {
+        if(n == 10){
+            map.flyTo({
+            center: h,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -20,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '十字路左'
+        }
+        else if(n == 9){
+            map.flyTo({
+            center: g,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 70,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '突き当り左'
+        }
+        else if(n == 8){
+            map.flyTo({
+            center: f,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -20,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '道なり右折'
+        }
+        else if(n == 7){
+            map.flyTo({
+            center: e,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 70,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '次の曲がり角左'
+        }
+        else if(n == 6){
+            map.flyTo({
+            center: d,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -20,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '突き当り右'
+        }
+        else if(n == 5){
+            map.flyTo({
+            center: c,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 70,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '次の曲がり角左'
+        }
+        else if(n == 4){
+            map.flyTo({
+            center: b,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: -35,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '突き当り右'
+        }
+        else if(n == 3){
+            map.flyTo({
+            center: a,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 50,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '道なり左折'
+        }
+        else if(n == 2){
+            map.flyTo({
+            center: tamachi,
+            zoom: 18,
+            padding: 40,
+		    pitch: 45,
+		    bearing: 100,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '出発'
+        }
+        else if(n == 1){
+            map.flyTo({
+            center: tamachi,
+            zoom: 18,
+            padding: 40,
+		    pitch: 45,
+		    bearing: 100,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+			document.getElementById('target').textContent = '出発'
+        }
+    });
+
+    document.getElementById('fly3').addEventListener('click', () => {
+            map.flyTo({
+            center: tamachi,
+            zoom: 18,
+            padding: 40,
+		    pitch: 45,
+		    bearing: 100,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = 1
+			document.getElementById('target').textContent = '出発'
+    });
+
+
+    // 画像アイコンと説明
+	const popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'法政大学市谷田町校舎'
+	);
+	const el1 = document.createElement('div');
+	el1.id = 'marker-tamachi';
+	new mapboxgl.Marker(el1)
+	.setLngLat(tamachi)
+	.setPopup(popup1)
+	.addTo(map);
+
+	// const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
+	// 	'階段'
+	// );
+	// const el2 = document.createElement('div');
+	// el2.id = 'marker2';
+	// new mapboxgl.Marker(el2)
+	// .setLngLat(kaidan)
+	// .setPopup(popup2)
+	// .addTo(map);
+
+	// const popup3 = new mapboxgl.Popup({ offset: 25 }).setText(
+	// 	'五差路'
+	// );
+	// const el3 = document.createElement('div');
+	// el3.id = 'marker3';
+	// new mapboxgl.Marker(el3)
+	// .setLngLat(gosaro)
+	// .setPopup(popup3)
+	// .addTo(map);
+
+	const popup4 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'道なり左折'
+	);
+	const el4 = document.createElement('div');
+	el4.id = 'marker-left';
+	new mapboxgl.Marker(el4)
+	.setLngLat(a)
+	.setPopup(popup4)
+	.addTo(map);
+
+    const popup5 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'突き当り右'
+	);
+	const el5 = document.createElement('div');
+	el5.id = 'marker-T-right';
+	new mapboxgl.Marker(el5)
+	.setLngLat(b)
+	.setPopup(popup5)
+	.addTo(map);
+
+    const popup6 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'次の曲がり角左'
+	);
+	const el6 = document.createElement('div');
+	el6.id = 'marker-next-left';
+	new mapboxgl.Marker(el6)
+	.setLngLat(c)
+	.setPopup(popup6)
+	.addTo(map);
+
+    const popup7 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'突き当り右'
+	);
+	const el7 = document.createElement('div');
+	el7.id = 'marker-T-right';
+	new mapboxgl.Marker(el7)
+	.setLngLat(d)
+	.setPopup(popup7)
+	.addTo(map);
+
+    const popup8 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'次の曲がり角左'
+	);
+	const el8 = document.createElement('div');
+	el8.id = 'marker-next-left';
+	new mapboxgl.Marker(el8)
+	.setLngLat(e)
+	.setPopup(popup8)
+	.addTo(map);
+
+    const popup9 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'道なり右折'
+	);
+	const el9 = document.createElement('div');
+	el9.id = 'marker-right';
+	new mapboxgl.Marker(el9)
+	.setLngLat(f)
+	.setPopup(popup9)
+	.addTo(map);
+
+    const popup10 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'突き当り左'
+	);
+	const el10 = document.createElement('div');
+	el10.id = 'marker-T-left';
+	new mapboxgl.Marker(el10)
+	.setLngLat(g)
+	.setPopup(popup10)
+	.addTo(map);
+
+    const popup11 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'十字路左'
+	);
+	const el11 = document.createElement('div');
+	el11.id = 'marker-cross-left';
+	new mapboxgl.Marker(el11)
+	.setLngLat(h)
+	.setPopup(popup11)
+	.addTo(map);
+
+    const popup12 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'中町公園'
+	);
+	const el12 = document.createElement('div');
+	el12.id = 'marker-park';
+	new mapboxgl.Marker(el12)
+	.setLngLat(park)
+	.setPopup(popup12)
+	.addTo(map);
+
+    const popup13 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'市ヶ谷矯正歯科'
+	);
+	const el13 = document.createElement('div');
+	el13.id = 'marker-hospital';
+	new mapboxgl.Marker(el13)
+	.setLngLat(dentist)
+	.setPopup(popup13)
+	.addTo(map);
+
+	// マーカー表示＆クリックで飛ぶ
+	// 田町
+	map.on('load', () => {
+		map.addSource('point1', {
+			'type': 'geojson',
+			'data': {
+				'type': 'Feature',
+						'properties': {},
+						'geometry': {
+							'type': 'Point',
+							'coordinates': tamachi
+						}
+			}
+		});
+		// Add a circle layer
+		map.addLayer({
+			'id': 'circle1',
+			'type': 'circle',
+			'source': 'point1',
+			'paint': {
+				'circle-color': '#4264fb',
+				'circle-radius': 10,
+				'circle-stroke-width': 3,
+				'circle-stroke-color': '#ffffff'
+			}
+		});
+		// Center the map on the coordinates of any clicked circle from the 'circle' layer.
+		map.on('click', 'circle1', () => {
+				map.flyTo({
+					center: tamachi,
+					zoom: 18,
+					pitch: 40,
+					bearing: 120
+				});
+		});
+		// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
+		map.on('mouseenter', 'circle1', () => {
+			map.getCanvas().style.cursor = 'pointer';
+		});	
+		// Change it back to a pointer when it leaves.
+		map.on('mouseleave', 'circle1', () => {
+			map.getCanvas().style.cursor = '';
+		});
+	});
+
+	// // 階段
+	// map.on('load', () => {
+	// 	map.addSource('point2', {
+	// 		'type': 'geojson',
+	// 		'data': {
+	// 			'type': 'Feature',
+	// 					'properties': {},
+	// 					'geometry': {
+	// 						'type': 'Point',
+	// 						'coordinates': kaidan
+	// 					}
+	// 		}
+	// 	});
+	// 	// Add a circle layer
+	// 	map.addLayer({
+	// 		'id': 'circle2',
+	// 		'type': 'circle',
+	// 		'source': 'point2',
+	// 		'paint': {
+	// 			'circle-color': '#4264fb',
+	// 			'circle-radius': 10,
+	// 			'circle-stroke-width': 3,
+	// 			'circle-stroke-color': '#ffffff'
+	// 		}
+	// 	});
+	// 	// Center the map on the coordinates of any clicked circle from the 'circle' layer.
+	// 	map.on('click', 'circle2', () => {
+	// 			map.flyTo({
+	// 				center: kaidan,
+	// 				zoom: 18,
+	// 				pitch: 40,
+	// 				bearing: 50
+	// 			});
+	// 	});
+	// 	// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
+	// 	map.on('mouseenter', 'circle2', () => {
+	// 		map.getCanvas().style.cursor = 'pointer';
+	// 	});	
+	// 	// Change it back to a pointer when it leaves.
+	// 	map.on('mouseleave', 'circle2', () => {
+	// 		map.getCanvas().style.cursor = '';
+	// 	});
+	// });
+
+	// // 五差路
+	// map.on('load', () => {
+	// 	map.addSource('point3', {
+	// 		'type': 'geojson',
+	// 		'data': {
+	// 			'type': 'Feature',
+	// 					'properties': {},
+	// 					'geometry': {
+	// 						'type': 'Point',
+	// 						'coordinates': gosaro
+	// 					}
+	// 		}
+	// 	});
+	// 	// Add a circle layer
+	// 	map.addLayer({
+	// 		'id': 'circle3',
+	// 		'type': 'circle',
+	// 		'source': 'point3',
+	// 		'paint': {
+	// 			'circle-color': '#4264fb',
+	// 			'circle-radius': 10,
+	// 			'circle-stroke-width': 3,
+	// 			'circle-stroke-color': '#ffffff'
+	// 		}
+	// 	});
+	// 	// Center the map on the coordinates of any clicked circle from the 'circle' layer.
+	// 	map.on('click', 'circle3', () => {
+	// 			map.flyTo({
+	// 				center: gosaro,
+	// 				zoom: 18,
+	// 				pitch: 40,
+	// 				bearing: 130
+	// 			});
+	// 	});
+	// 	// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
+	// 	map.on('mouseenter', 'circle3', () => {
+	// 		map.getCanvas().style.cursor = 'pointer';
+	// 	});	
+	// 	// Change it back to a pointer when it leaves.
+	// 	map.on('mouseleave', 'circle3', () => {
+	// 		map.getCanvas().style.cursor = '';
+	// 	});
+	// });
+
+
+    // 位置情報
+    map.addControl(
+        new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            // When active the map will receive updates to the device's location as it changes.
+            trackUserLocation: true,
+            // Draw an arrow next to the location dot to indicate which direction the device is heading.
+            showUserHeading: true
+        })
+    );
+
+</script>
+
+</body>
+</html>
