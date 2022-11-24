@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>テストマップ(埼玉)</title>
+<title>テストマップ(埼玉01)</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
@@ -13,13 +13,24 @@ body { margin: 0; padding: 0; }
 </head>
 <body>
 <style>
+	.gui { 
 
+	}
+
+	.btns { 
+		margin: 0 auto;
+        width: 500px;
+        height: 200px;
+		display: flex;
+		justify-content: space-between;
+		z-index: 99;
+	}
     #fly {
         display: inline-block;
         position: relative;
         width: 100px;
         height: 100px;
-		top: 200px;
+		top: 350px;
 		left: 35px;
         padding: 10px;
         border: 3px solid #46b2bb;
@@ -30,6 +41,8 @@ body { margin: 0; padding: 0; }
         font-weight: 100;
         color: #fff;
         background: #46b2bb;
+		touch-action: none;
+		z-index: 99;
     }
 
     #fly2 {
@@ -37,7 +50,7 @@ body { margin: 0; padding: 0; }
         position: relative;
         width: 100px;
         height: 100px;
-		top: 200px;
+		top: 350px;
 		left: 35px;
         padding: 10px;
         border: 3px solid #46b2bb;
@@ -47,7 +60,8 @@ body { margin: 0; padding: 0; }
         font-size: 15px;
         font-weight: 100;
         color: #46b2bb;
-        background: #fff;        
+        background: #fff;
+		touch-action: none;    
     }
 
     #fly3 {
@@ -55,7 +69,7 @@ body { margin: 0; padding: 0; }
         position: relative;
         width: 100px;
         height: 100px;
-		top: 200px;
+		top: 350px;
 		left: 35px;
         padding: 10px;
         border: 3px solid #f9ad9b;
@@ -66,6 +80,7 @@ body { margin: 0; padding: 0; }
         font-weight: 100;
         color: #fff;
         background: #f9ad9b;
+		touch-action: none;
     }
 
     /* 経路表示用のボタン */
@@ -87,7 +102,7 @@ body { margin: 0; padding: 0; }
 	}
 
 	/* 画像アイコンと説明用のスタイル */
-	#marker-tamachi {
+	#marker-school {
 		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEW7eqZ59JMA6mx3vfVZg7n41Z10OCAqaWt8uVthsUO0wDAkETS1yqxficaZ0n9XgqI1ySgCJDykp-uACb7Z47IPM66BBuOa6vddgk0cOIxOghv7lopJDMBb2aAjwcyeK46b20RuvA0l2LDwXVO4eoNG=s893-no?authuser=0');
 		background-size: cover;
 		width: 30px;
@@ -110,6 +125,60 @@ body { margin: 0; padding: 0; }
 		background-size: cover;
 		width: 30px;
 		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-convenience-store {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEWD2WrFL57Wp_uoj1u53v_9zMeiQ7I5hy37fKiFrXT_ZvU1_V3eWPZwShdIA_K2m4XLMUsSlLYWuiKfK18tGif4qMDKx3tL5bRymwRxtbPnX9_DStxkeYIw-8kRbofT2KgGk3qFQOPp9B1TaewPPQpR=s893-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-toilet {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEXbDtPLsh-ozO0o8HPn9jsRQKTblTWu5AHbN-ELWcYC8WJ7HKFyrd1V-xjBDFhLYAD46ysgACVtgbx2_pdXhd9t0yJEOnugKWRy9VjioaoY30JCTnMJPVL561kD1iKkJDqMWjeDrerS9nSUGLwmqwQt=s893-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}   
+    
+    #marker-food {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEX1-pcsp03rwNe5w1pIMyyy1CwjhFmzDgitTslO0yXCM_MNTGjpsx7Z9ZCGZi37SSA_FGV2h7eATeK_ODW-9qgdFpg2WJ8zE26ANUxOTxHClqROvGvbE_4UY4H2ccyyngT7D8nR7Pos7b8pDViXDjKH=w948-h820-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}   
+
+    #marker-building {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEX2zaU8wICM4TyOgn8lIX85b23bbxX-IZcGloTC6epwSqiFlargjKh-6Jl03_aieL4INwwtJ8Odz6Qu7TcAnHhBNb3RUtP94WjXa89AedHOV2DI3F8AOYeNvUQRMUuPqQDcMPmrwip324GRbPrC11cw=s820-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-stop {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEX9K3V1n-qh_Da_BeHvrKjqBioX4gonMvzXFddBiEUgPIVABE7inBLGF3De-Yv_CQlDH1Wf6AvO76u5vNHhc-wdjWMXLSsuSgMwAb4mL_8MBPW_CSXszxG03dawD8SnZVp0LWxXoNfRkymbrK3Bdr4J=s893-no?authuser=0');
+		background-size: cover;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-signal {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEXZQnHfIIyhDp37Ct-HzI4iYukxFk28_VB1d0M92_SN7TrfVBWtTjGCAanbjZBzO1MkaVDw2Mzkd5PINLV6duoHYU9cuVJK99C9nf3yfWRLEo1wvEsrB59MX6ENY4fVSQxqYnnhYypXQo5ma2MvROl1=s893-no?authuser=0');
+		background-size: cover;
+		width: 50px;
+		height: 50px;
 		border-radius: 50%;
 		cursor: pointer;
 	}
@@ -168,6 +237,33 @@ body { margin: 0; padding: 0; }
 		cursor: pointer;
 	}
 
+    #marker-cross-right {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEW0cLgN1_i0AlDnok19Z3plBJOPTJRnHUu0xPlVKAwUKELcWUX-eJsiNK2Xievj5CNuqZzPR1v5Lxjcp5Uv7wkQGftoKi5LO96p6mQ9HMHj20hvRZu9ZxxDEhX6Z-3C-TkVtkA4zjpKKNLYIsN4-KHt=s893-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-straight {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEV_Lg-u24FtCsI8IA8GQTRNvTcXwVvmPKWQQRIrwgMYbAtw0hGPAVEvNaZIDEPIazbKU6F29CLt30AwuwHs4-l30ea8NAouVTCb72o273qXmCGk8oVU7T4Gs1z9St-hHv6HYTwC5onhNWqe0Hrp_34N=s893-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+    #marker-gosaro {
+		background-image: url('https://lh3.googleusercontent.com/pw/AL9nZEXE-Fnb0umi5gYeeqtzK1GRNgF7cxWCuQgSt9hcXTfX6srAOCk1goF3lykZXCoFHhcPzjZEfnGXa1kU1v3b7YdTQOFajh5plXGT9Z7cF6NdVBytMFMooQ8qRfcCkUnFJgeDaNspMdAdz07TYGFN5hv_=s893-no?authuser=0');
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
 	.mapboxgl-popup {
 		max-width: 200px;
         font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -175,10 +271,12 @@ body { margin: 0; padding: 0; }
 
 	.text-image {
 		position: relative;
+		display: flex;
 		width: 330px;
-		height: 300px;
+		height: 150px;
 		top: 20px;
 		left: 20px;
+		touch-action: none;
 	}
 	.text-image img {
 		position: absolute;
@@ -205,38 +303,46 @@ body { margin: 0; padding: 0; }
 
 </style>
 <div id="map"></div>
-<div class="text-image">
-	<img src="https://lh3.googleusercontent.com/pw/AL9nZEUjJ9lg4bnpOQAMpSP62NaJlL8taAAoDXZKbvX8GveIm2sWNu6P__ET8PcHl64KcFS3mDpdi0Rux_uwywWePYiFkcop21tm2jt1EGwIUy8l41v0F-7nMTvVKctuInxRT-asTg4aBLcDhKjGTGTLbt2B=w1648-h893-no?authuser=0" alt="" class="background">
-	<img id="picture" src="https://lh3.googleusercontent.com/pw/AL9nZEUNrQwQG1_59-dKMoHLoMVI5k0v2NY2CWT1H0RY_mhgUO3FT1i8MyV0PR8ZOCzecpCjnBXOjrDeO2tNlo1q6e9t6-ifMJJlbnBvN6Dygmn9IFBhECUHoEE6uUy89Utz1UF0ZOBwIZTmFlQOxiCTwEao=w1920-h774-no?authuser=0" alt="" class="picture">
-	<p id="target">目印</p>
+<div class = "gui">
+	<div class="text-image">
+		<img src="https://lh3.googleusercontent.com/pw/AL9nZEUjJ9lg4bnpOQAMpSP62NaJlL8taAAoDXZKbvX8GveIm2sWNu6P__ET8PcHl64KcFS3mDpdi0Rux_uwywWePYiFkcop21tm2jt1EGwIUy8l41v0F-7nMTvVKctuInxRT-asTg4aBLcDhKjGTGTLbt2B=w1648-h893-no?authuser=0" alt="" class="background">
+		<img id="picture" src="https://lh3.googleusercontent.com/pw/AL9nZEX4ICnem_YvB5XOj7mIz4DfB38U6-5QJc9VdUYKomNukbP1Fiqxhp6PbxT_IzNtWdq_Sc41d4PigpIxEVbb5ojWaPM4J6ie2WGEVKZ3twnpFr8jHwK8EsYd0OFpc_Gt0WB06kghkgxXZ3OCpSorTuhf=s893-no?authuser=0" alt="" class="picture">
+		<p id="target">目印</p>
+	</div>
+	<br>
+	<!-- <div class = "btns"> -->
+		<button id="fly3">出発地点</button>
+		<button id="fly2">◃前の目印</button>
+		<button id="fly">次の目印▹</button>
+	<!-- </div> -->
 </div>
-<br>
-<button id="fly3">出発地点</button>
-<button id="fly2">◃前の目印</button>
-<button id="fly">次の目印▹</button>
 <!-- <button id="zoomto" class="btn-control">経路全体表示</button> -->
 <script>
+    const takashimaya = [139.62648645491126, 35.906404152282654];
+    const suit = [139.62698174869547, 35.90656634301897];
+    const takashimayaSign = [139.6267561554606, 35.906710567823026];
+    const hukuroya = [139.628013498566, 35.90678841698041];
+    const hukuroyaSign = [139.62812377219993, 35.90687303453358];
+    const kuyakusho = [139.62860742551604, 35.90616732732761];
+    const kuyakushoCross = [139.62846586131337, 35.90583142863259];
+    const thin = [139.6291167691087, 35.90582942767883];
+    const school = [139.62999149637938, 35.90602259682951];
+    const schoolCross = [139.62981480495768, 35.905984581493385];
+    const lucea = [139.6300486530603, 35.90546971961704];
+	const luceaCross = [139.62997428740186, 35.905508229214945];
+    const sakaya = [139.6314442290821, 35.90577542693546];
+    const sakayaCross = [139.63136932152614, 35.9058052971156];
+    const dentist = [139.63152459941, 35.90569437745067];
 
-    // const aaa = [139.6220376, 35.8788746];
-    // const bbb = [139.6181326, 35.8901640];
-    // const ccc = [139.6212518, 35.8910195];
+	const urlTakashimaya = 'https://lh3.googleusercontent.com/pw/AL9nZEUgJRBX7uz8wOfvhJQPpZjePIfPmqYHxMjve5NIO7JCiUVb7zN-Loy8sHxPH9mtdcvYCkOfe_Zlmkgt3UgRjGUeYzmPJvauqYih5tD4j_edv0Dp_isN5bU84bfd_S7l8k6GBjAHYUJhYfT01vxcA5JM=s862-no?authuser=0'
+    const urlHukuroya = 'https://lh3.googleusercontent.com/pw/AL9nZEXpAjG2GloxMQejQp9epk3EKhm9JTM7q7ewfih2oMHTI3TCvmdeScNJVtvWEr34FlJRIlhJ1CvxXjqXcR9-qg5i8JinVILakQ9JQmBLHk49EhzX6DVb2ej5JUsSX53z7lDRCePbeu6hzJOb3eVBd9-F=s881-no?authuser=0'
+    const urlKuyakusho = 'https://lh3.googleusercontent.com/pw/AL9nZEUaSIEuKhoDn1WdaFDqeHf2gdzfPp5_yptORa7HWPyRm_RTWenCyRSQHwDmoaCkZkgsK5F8NQD9OO5Hxzul_Flr_luNCGuMKufuU-FKbcrpVYMisRXmoYWWU61b4emUVVF-udLDJ1PLhMcsQnU0ALyO=s858-no?authuser=0'
+    const urlThin = 'https://lh3.googleusercontent.com/pw/AL9nZEUuGjlVLgzHQ-rdh-a0gc_wJtxp-J-qICNnd8nM4TnUMne4B2PVQKVsYSl_Co8vM1NnAoeZ8_wIzuviY9ry1u4h4uA-zfgot3qO9vjsVzo5FQwD14r1rvAZIfPcq6Ma5aTXtRtL8fxPeGTK0DwMRBPh=s831-no?authuser=0'
+    const urlSchool = 'https://lh3.googleusercontent.com/pw/AL9nZEV506_isCNWvtqhaeLYPHyiMQiQhDmdCeL5rwsOttMw759fON8u3vypzVlqHKRjCqrCWFaIPWVDknQd03s3YdUqRfZYD93xEZJ33mzRVhUtFgz86q1TEcsyn8czWPeqP046jbihmYOUilmOnldDWpBL=s843-no?authuser=0'
+    const urlLucea = 'https://lh3.googleusercontent.com/pw/AL9nZEVb_fxCKDXC1wP1Cvz5zr1I4TgRUA2Oaj9NZOzvskpZbBPkpJk1kEhhQvI_TYz4eWVdViz9KU6IsYd1uPbZIAd_PPGMVH9UYk6mU6mNMlsZb3LSTI9h6vkNfdsIGsCh17YdVUY0aOZdRQJ-Ctged_D4=s842-no?authuser=0'
+    const urlSakaya = 'https://lh3.googleusercontent.com/pw/AL9nZEVCjJZWcUIcwo5Qy37SnegQN3c1EZDQqqgu9kDbMASmEn40RAx7IM9-VoVy9oad0hcW2h9sSN6mHA3f-JfOJo7lAcbnyVFelCkODgO0bbbH8Dscuv33WDAkkJ5-ccud8kpsKgmYgx_LS-hb2FiVMsHd=s828-no?authuser=0'
+    const urlDentist = 'https://lh3.googleusercontent.com/pw/AL9nZEVKDTslCAgBDbRlkKrGA1VqobQlH2zKj4gOaq3XOJsrhXTqtrnvFsh6-nBU828CJCTsp0kpKCY6ETtoBJk2zczb8t3vkF2EDORu4BgFoABc3RAU2M4r5qyzjPPY5HBUzZLYUv2C3rdbOPOpLxfhNyxY=s854-no?authuser=0'
 
-    const tamachi = [139.737018, 35.69555];
-	const kaidan = [139.737705, 35.696267];
-	const gosaro = [139.739961, 35.694756];
-    const dentist = [139.73670662292648, 35.69573591349243];
-
-    const a = [139.7378087, 35.6964356];
-    const b = [139.7374621, 35.6967884];
-    const c = [139.7378161, 35.6969210];
-    const d = [139.7373088, 35.6978996];
-    const e = [139.7377293, 35.6980499];
-    const f = [139.7375747, 35.6983696];
-    const g = [139.7379744, 35.6986767];
-    const h = [139.7374768, 35.6997721];
-    const park = [139.7370625810891, 35.69943941120695];
-
-	const urlTamachi = 'https://www.hosei.ac.jp/application/files/1315/7753/1438/co_190122_NAG9873.jpg'
 
 	mapboxgl.accessToken = 'pk.eyJ1IjoiaW5vdWVrb3N1a2UiLCJhIjoiY2w1dXVjMXR0MDBoZTNjcHNneDBoY2p1ayJ9.QOyj-eLyQbQZ_2A2502t1A';
     
@@ -251,7 +357,7 @@ body { margin: 0; padding: 0; }
 					'type': 'LineString',
 					'properties': {},
 					'coordinates': [
-						[ 139.7370592, 35.6994275, 0.0 ], [ 139.73707, 35.69945, 0.0 ], [ 139.73707, 35.69946, 0.0 ], [ 139.73707, 35.69947, 0.0 ], [ 139.73707, 35.69948, 0.0 ], [ 139.73706, 35.69949, 0.0 ], [ 139.73706, 35.69951, 0.0 ], [ 139.73705, 35.69952, 0.0 ], [ 139.73704, 35.69952, 0.0 ], [ 139.73704, 35.69953, 0.0 ], [ 139.73703, 35.69953, 0.0 ], [ 139.73702, 35.69953, 0.0 ], [ 139.737, 35.69953, 0.0 ], [ 139.73697, 35.69953, 0.0 ], [ 139.736970899999989, 35.6995344, 0.0 ], [ 139.737, 35.69957, 0.0 ], [ 139.737, 35.69959, 0.0 ], [ 139.736995, 35.6995858, 0.0 ], [ 139.73704, 35.6996, 0.0 ], [ 139.73724, 35.69967, 0.0 ], [ 139.73744, 35.69974, 0.0 ], [ 139.7374437, 35.6997354, 0.0 ], [ 139.73758, 35.69945, 0.0 ], [ 139.73759, 35.69944, 0.0 ], [ 139.73765, 35.6993, 0.0 ], [ 139.73767, 35.69925, 0.0 ], [ 139.73774, 35.69909, 0.0 ], [ 139.73776, 35.69905, 0.0 ], [ 139.73784, 35.69888, 0.0 ], [ 139.73785, 35.69886, 0.0 ], [ 139.73794, 35.69868, 0.0 ], [ 139.7379369, 35.6986751, 0.0 ], [ 139.73783, 35.69864, 0.0 ], [ 139.73782, 35.69863, 0.0 ], [ 139.73781, 35.69863, 0.0 ], [ 139.7378, 35.69862, 0.0 ], [ 139.7378, 35.69861, 0.0 ], [ 139.73779, 35.6986, 0.0 ], [ 139.73779, 35.69859, 0.0 ], [ 139.73779, 35.69858, 0.0 ], [ 139.73779, 35.69855, 0.0 ], [ 139.73779, 35.69854, 0.0 ], [ 139.73779, 35.69853, 0.0 ], [ 139.73778, 35.69851, 0.0 ], [ 139.73777, 35.6985, 0.0 ], [ 139.73776, 35.69848, 0.0 ], [ 139.73774, 35.69847, 0.0 ], [ 139.73771, 35.69846, 0.0 ], [ 139.73769, 35.69845, 0.0 ], [ 139.73762, 35.69842, 0.0 ], [ 139.7376, 35.69841, 0.0 ], [ 139.73758, 35.69839, 0.0 ], [ 139.73757, 35.69838, 0.0 ], [ 139.73756, 35.69837, 0.0 ], [ 139.73756, 35.69836, 0.0 ], [ 139.73756, 35.69835, 0.0 ], [ 139.73756, 35.69834, 0.0 ], [ 139.73757, 35.69832, 0.0 ], [ 139.7377, 35.69807, 0.0 ], [ 139.737695800000012, 35.6980733, 0.0 ], [ 139.73729, 35.69793, 0.0 ], [ 139.73727, 35.69792, 0.0 ], [ 139.737267300000013, 35.6979242, 0.0 ], [ 139.7373, 35.69785, 0.0 ], [ 139.73762, 35.69722, 0.0 ], [ 139.73765, 35.69716, 0.0 ], [ 139.73769, 35.69711, 0.0 ], [ 139.73778, 35.69693, 0.0 ], [ 139.7377836, 35.6969311, 0.0 ], [ 139.73776, 35.69692, 0.0 ], [ 139.73768, 35.69689, 0.0 ], [ 139.73747, 35.69682, 0.0 ], [ 139.7374709, 35.6968239, 0.0 ], [ 139.73749, 35.69679, 0.0 ], [ 139.73755, 35.69673, 0.0 ], [ 139.73759, 35.69668, 0.0 ], [ 139.73772, 35.69655, 0.0 ], [ 139.73776, 35.69651, 0.0 ], [ 139.73778, 35.69648, 0.0 ], [ 139.73783, 35.69643, 0.0 ], [ 139.73782, 35.69641, 0.0 ], [ 139.73776, 35.69636, 0.0 ], [ 139.73767, 35.6963, 0.0 ], [ 139.73763, 35.69628, 0.0 ], [ 139.73744, 35.69616, 0.0 ], [ 139.737443899999988, 35.6961559, 0.0 ], [ 139.7374, 35.69613, 0.0 ], [ 139.73721, 35.69599, 0.0 ], [ 139.73707, 35.69589, 0.0 ], [ 139.73703, 35.69586, 0.0 ], [ 139.737, 35.69583, 0.0 ], [ 139.73695, 35.69579, 0.0 ], [ 139.7369, 35.69575, 0.0 ], [ 139.73689, 35.69574, 0.0 ], [ 139.736891899999989, 35.6957414, 0.0 ]
+					[139.62666384854825, 35.90659564314755, 0.0],[139.62818837194695, 35.906882910832636, 0.0], [ 139.6284, 35.90589, 0.0 ], [ 139.62845, 35.9059, 0.0 ], [ 139.62847, 35.90585, 0.0 ], [ 139.628469200000012, 35.9058498, 0.0 ], [ 139.62858, 35.90587, 0.0 ], [ 139.62876, 35.9059, 0.0 ], [ 139.62879, 35.9059, 0.0 ], [ 139.62881, 35.90589, 0.0 ], [ 139.6291, 35.90585, 0.0 ], [ 139.62922, 35.90587, 0.0 ], [ 139.62935, 35.90589, 0.0 ], [ 139.62952, 35.90594, 0.0 ], [ 139.62956, 35.90595, 0.0 ], [ 139.62976, 35.906, 0.0 ], [ 139.62983, 35.906, 0.0 ], [ 139.6298267, 35.9060043, 0.0 ], [ 139.62985, 35.90596, 0.0 ], [ 139.6299, 35.90582, 0.0 ], [ 139.6299, 35.90579, 0.0 ], [ 139.62991, 35.90575, 0.0 ], [ 139.62992, 35.90568, 0.0 ], [ 139.62996, 35.90557, 0.0 ], [ 139.62997, 35.90554, 0.0 ], [ 139.62997, 35.90552, 0.0 ], [ 139.629973400000011, 35.90552, 0.0 ], [ 139.63003, 35.90553, 0.0 ], [ 139.63055, 35.90565, 0.0 ], [ 139.6307, 35.90568, 0.0 ], [ 139.63078, 35.90569, 0.0 ], [ 139.63086, 35.90571, 0.0 ], [ 139.63102, 35.90572, 0.0 ], [ 139.63106, 35.90573, 0.0 ], [ 139.6311, 35.90574, 0.0 ], [ 139.63113, 35.90575, 0.0 ], [ 139.63137, 35.90582, 0.0 ], [ 139.631371, 35.9058175, 0.0 ], [ 139.63138, 35.9058, 0.0 ], [ 139.6314, 35.90567, 0.0 ], [ 139.6313993, 35.9056727, 0.0 ]
 					]
 				}
 			}
@@ -261,7 +367,7 @@ body { margin: 0; padding: 0; }
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/inouekosuke/cl96xiif7000115qliw1b7tfr',
-        center: tamachi,
+        center: takashimaya,
         zoom: 18,
         padding: 40,
 		pitch: 20,
@@ -318,92 +424,85 @@ body { margin: 0; padding: 0; }
     document.getElementById('fly').addEventListener('click', () => {
         if(n == 0){
             map.flyTo({
-            center: tamachi,
+            center: takashimaya,
             zoom: 18,
             padding: 40,
 		    pitch: 45,
-		    bearing: 100,
+		    bearing: 130,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1,
-			document.getElementById('target').textContent = '出発'
-			document.getElementById('picture').src = urlTamachi
+			document.getElementById('target').textContent = '高島屋　　　　出発'
+			document.getElementById('picture').src = urlTakashimaya
         }
         else if(n == 1){
             map.flyTo({
-            center: a,
+            center: hukuroyaSign,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: 50,
+		    bearing: 80,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1,
-			document.getElementById('target').textContent = '道なり左折'
+			document.getElementById('target').textContent = '福呂屋　　　　右'
+            document.getElementById('picture').src = urlHukuroya
         }
         else if(n == 2){
             map.flyTo({
-            center: b,
+            center:kuyakushoCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: -35,
+		    bearing: 165,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1
-			document.getElementById('target').textContent = '突き当り右'
+			document.getElementById('target').textContent = '旧大宮区役所　左'
+            document.getElementById('picture').src = urlKuyakusho
         }
         else if(n == 3){
             map.flyTo({
-            center: c,
+            center: thin,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: 70,
+		    bearing: 75,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1
-			document.getElementById('target').textContent = '次の曲がり角左'
+			document.getElementById('target').textContent = '細い道　　　　直進'
+            document.getElementById('picture').src = urlThin
         }
         else if(n == 4){
             map.flyTo({
-            center: d,
+            center: schoolCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: -20,
+		    bearing: 70,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1
-			document.getElementById('target').textContent = '突き当り右'
+			document.getElementById('target').textContent = '大宮小学校　　右'
+            document.getElementById('picture').src = urlSchool
         }
         else if(n == 5){
             map.flyTo({
-            center: e,
+            center: luceaCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: 70,
+		    bearing: 160,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1
-			document.getElementById('target').textContent = '次の曲がり角左'
+			document.getElementById('target').textContent = 'ネイルサロンLUCEA　左'
+            document.getElementById('picture').src = urlLucea
         }
         else if(n == 6){
             map.flyTo({
-            center: f,
-            zoom: 18,
-            padding: 40,
-		    pitch: 0,
-		    bearing: -20,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
-            n = n + 1
-			document.getElementById('target').textContent = '道なり右折'
-        }
-        else if(n == 7){
-            map.flyTo({
-            center: g,
+            center: sakayaCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
@@ -411,50 +510,28 @@ body { margin: 0; padding: 0; }
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1
-			document.getElementById('target').textContent = '突き当り左'
+			document.getElementById('target').textContent = '酒屋しみず　　右'
+            document.getElementById('picture').src = urlSakaya
         }
-        else if(n == 8){
+        else if(n == 7){
             map.flyTo({
-            center: h,
-            zoom: 18,
-            padding: 40,
-		    pitch: 0,
-		    bearing: -20,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
-            n = n + 1
-			document.getElementById('target').textContent = '十字路左'
-        }
-        else if(n == 9){
-            map.flyTo({
-            center: park,
-            zoom: 18,
+            center: dentist,
+            zoom: 19,
             padding: 40,
 		    pitch: 45,
-		    bearing: 190,
+		    bearing: 120,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n + 1
-			document.getElementById('target').textContent = '中町公園'
+			document.getElementById('target').textContent = '大久保歯科医院　到着'
+            document.getElementById('picture').src = urlDentist
         }
     });
 
     document.getElementById('fly2').addEventListener('click', () => {
-        if(n == 10){
+        if(n == 8){
             map.flyTo({
-            center: h,
-            zoom: 18,
-            padding: 40,
-		    pitch: 0,
-		    bearing: -20,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
-            n = n - 1
-			document.getElementById('target').textContent = '十字路左'
-        }
-        else if(n == 9){
-            map.flyTo({
-            center: g,
+			center: sakayaCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
@@ -462,47 +539,25 @@ body { margin: 0; padding: 0; }
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n - 1
-			document.getElementById('target').textContent = '突き当り左'
-        }
-        else if(n == 8){
-            map.flyTo({
-            center: f,
-            zoom: 18,
-            padding: 40,
-		    pitch: 0,
-		    bearing: -20,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
-            n = n - 1
-			document.getElementById('target').textContent = '道なり右折'
+			document.getElementById('target').textContent = '酒屋しみず　　右'
+            document.getElementById('picture').src = urlSakaya
         }
         else if(n == 7){
             map.flyTo({
-            center: e,
+			center: luceaCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: 70,
+		    bearing: 160,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n - 1
-			document.getElementById('target').textContent = '次の曲がり角左'
+			document.getElementById('target').textContent = 'ネイルサロンLUCEA　右'
+            document.getElementById('picture').src = urlLucea
         }
         else if(n == 6){
             map.flyTo({
-            center: d,
-            zoom: 18,
-            padding: 40,
-		    pitch: 0,
-		    bearing: -20,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
-            n = n - 1
-			document.getElementById('target').textContent = '突き当り右'
-        }
-        else if(n == 5){
-            map.flyTo({
-            center: c,
+			center: schoolCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
@@ -510,246 +565,317 @@ body { margin: 0; padding: 0; }
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n - 1
-			document.getElementById('target').textContent = '次の曲がり角左'
+			document.getElementById('target').textContent = '大宮小学校　　右'
+            document.getElementById('picture').src = urlSchool
+        }
+        else if(n == 5){
+            map.flyTo({
+			center: thin,
+            zoom: 18,
+            padding: 40,
+		    pitch: 0,
+		    bearing: 75,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+            n = n - 1
+			document.getElementById('target').textContent = '細い道　　　　直進'
+            document.getElementById('picture').src = urlThin
         }
         else if(n == 4){
             map.flyTo({
-            center: b,
+			center:kuyakushoCross,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: -35,
+		    bearing: 165,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n - 1
-			document.getElementById('target').textContent = '突き当り右'
+			document.getElementById('target').textContent = '旧大宮区役所　左'
+            document.getElementById('picture').src = urlKuyakusho
         }
         else if(n == 3){
             map.flyTo({
-            center: a,
+			center: hukuroyaSign,
             zoom: 18,
             padding: 40,
 		    pitch: 0,
-		    bearing: 50,
+		    bearing: 80,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n - 1
-			document.getElementById('target').textContent = '道なり左折'
+			document.getElementById('target').textContent = '福呂屋　　　　右'
+            document.getElementById('picture').src = urlHukuroya
         }
         else if(n == 2){
             map.flyTo({
-            center: tamachi,
+			center: takashimaya,
             zoom: 18,
             padding: 40,
 		    pitch: 45,
-		    bearing: 100,
+		    bearing: 130,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = n - 1
-			document.getElementById('target').textContent = '出発'
+			document.getElementById('target').textContent = '高島屋　　　　出発'
+			document.getElementById('picture').src = urlTakashimaya
         }
         else if(n == 1){
             map.flyTo({
-            center: tamachi,
+			center: takashimaya,
             zoom: 18,
             padding: 40,
 		    pitch: 45,
-		    bearing: 100,
+		    bearing: 130,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
-			document.getElementById('target').textContent = '出発'
+			document.getElementById('target').textContent = '高島屋　　　　出発'
+			document.getElementById('picture').src = urlTakashimaya
         }
     });
 
     document.getElementById('fly3').addEventListener('click', () => {
             map.flyTo({
-            center: tamachi,
+			center: takashimaya,
             zoom: 18,
             padding: 40,
 		    pitch: 45,
-		    bearing: 100,
+		    bearing: 130,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
             n = 1
-			document.getElementById('target').textContent = '出発'
+			document.getElementById('target').textContent = '高島屋　　　　出発'
+			document.getElementById('picture').src = urlTakashimaya
     });
 
 
     // 画像アイコンと説明
 	const popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'法政大学市谷田町校舎'
+		'高島屋'
 	);
 	const el1 = document.createElement('div');
-	el1.id = 'marker-tamachi';
+	el1.id = 'marker-building';
 	new mapboxgl.Marker(el1)
-	.setLngLat(tamachi)
+	.setLngLat(takashimaya)
 	.setPopup(popup1)
 	.addTo(map);
 
-	// const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
-	// 	'階段'
-	// );
-	// const el2 = document.createElement('div');
-	// el2.id = 'marker2';
-	// new mapboxgl.Marker(el2)
-	// .setLngLat(kaidan)
-	// .setPopup(popup2)
-	// .addTo(map);
+	const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'SUIT SELECT大宮東'
+	);
+	const el2 = document.createElement('div');
+	el2.id = 'marker-biulding';
+	new mapboxgl.Marker(el2)
+	.setLngLat(suit)
+	.setPopup(popup2)
+	.addTo(map);
 
-	// const popup3 = new mapboxgl.Popup({ offset: 25 }).setText(
-	// 	'五差路'
-	// );
-	// const el3 = document.createElement('div');
-	// el3.id = 'marker3';
-	// new mapboxgl.Marker(el3)
-	// .setLngLat(gosaro)
-	// .setPopup(popup3)
-	// .addTo(map);
+	const popup3 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'福呂屋'
+	);
+	const el3 = document.createElement('div');
+	el3.id = 'marker-building';
+	new mapboxgl.Marker(el3)
+	.setLngLat(hukuroya)
+	.setPopup(popup3)
+	.addTo(map);
 
 	const popup4 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'道なり左折'
+		'右'
 	);
 	const el4 = document.createElement('div');
-	el4.id = 'marker-left';
+	el4.id = 'marker-cross-right';
 	new mapboxgl.Marker(el4)
-	.setLngLat(a)
+	.setLngLat(hukuroyaSign)
 	.setPopup(popup4)
 	.addTo(map);
 
     const popup5 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'突き当り右'
+		'区役所'
 	);
 	const el5 = document.createElement('div');
-	el5.id = 'marker-T-right';
+	el5.id = 'marker-building';
 	new mapboxgl.Marker(el5)
-	.setLngLat(b)
+	.setLngLat(kuyakusho)
 	.setPopup(popup5)
 	.addTo(map);
 
     const popup6 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'次の曲がり角左'
+		'左'
 	);
 	const el6 = document.createElement('div');
 	el6.id = 'marker-next-left';
 	new mapboxgl.Marker(el6)
-	.setLngLat(c)
+	.setLngLat(kuyakushoCross)
 	.setPopup(popup6)
 	.addTo(map);
 
     const popup7 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'突き当り右'
+		'直進'
 	);
 	const el7 = document.createElement('div');
-	el7.id = 'marker-T-right';
+	el7.id = 'marker-straight';
 	new mapboxgl.Marker(el7)
-	.setLngLat(d)
+	.setLngLat(thin)
 	.setPopup(popup7)
 	.addTo(map);
 
     const popup8 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'次の曲がり角左'
+		'大宮小学校'
 	);
 	const el8 = document.createElement('div');
-	el8.id = 'marker-next-left';
+	el8.id = 'marker-school';
 	new mapboxgl.Marker(el8)
-	.setLngLat(e)
+	.setLngLat(school)
 	.setPopup(popup8)
 	.addTo(map);
 
     const popup9 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'道なり右折'
+		'右'
 	);
 	const el9 = document.createElement('div');
-	el9.id = 'marker-right';
+	el9.id = 'marker-T-right';
 	new mapboxgl.Marker(el9)
-	.setLngLat(f)
+	.setLngLat(schoolCross)
 	.setPopup(popup9)
 	.addTo(map);
 
     const popup10 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'突き当り左'
+		'LUCEA'
 	);
 	const el10 = document.createElement('div');
-	el10.id = 'marker-T-left';
+	el10.id = 'marker-building';
 	new mapboxgl.Marker(el10)
-	.setLngLat(g)
+	.setLngLat(lucea)
 	.setPopup(popup10)
 	.addTo(map);
 
     const popup11 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'十字路左'
+		'左'
 	);
 	const el11 = document.createElement('div');
 	el11.id = 'marker-cross-left';
 	new mapboxgl.Marker(el11)
-	.setLngLat(h)
+	.setLngLat(luceaCross)
 	.setPopup(popup11)
 	.addTo(map);
 
-    const popup12 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'中町公園'
-	);
-	const el12 = document.createElement('div');
-	el12.id = 'marker-park';
-	new mapboxgl.Marker(el12)
-	.setLngLat(park)
-	.setPopup(popup12)
-	.addTo(map);
+    // const popup12 = new mapboxgl.Popup({ offset: 25 }).setText(
+	// 	'麒麟宴 右'
+	// );
+	// const el12 = document.createElement('div');
+	// el12.id = 'marker-cross-right';
+	// new mapboxgl.Marker(el12)
+	// .setLngLat(kirinenJuji)
+	// .setPopup(popup12)
+	// .addTo(map);
 
     const popup13 = new mapboxgl.Popup({ offset: 25 }).setText(
-		'市ヶ谷矯正歯科'
+		'酒屋しみず'
 	);
 	const el13 = document.createElement('div');
-	el13.id = 'marker-hospital';
+	el13.id = 'marker-building';
 	new mapboxgl.Marker(el13)
-	.setLngLat(dentist)
+	.setLngLat(sakaya)
 	.setPopup(popup13)
 	.addTo(map);
 
+    const popup14 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'右'
+	);
+	const el14 = document.createElement('div');
+	el14.id = 'marker-cross-right';
+	new mapboxgl.Marker(el14)
+	.setLngLat(sakayaCross)
+	.setPopup(popup14)
+	.addTo(map);
+
+    const popup15 = new mapboxgl.Popup({ offset: 25 }).setText(
+		'大久保歯科医院'
+	);
+	const el15 = document.createElement('div');
+	el15.id = 'marker-hospital';
+	new mapboxgl.Marker(el15)
+	.setLngLat(dentist)
+	.setPopup(popup15)
+	.addTo(map);
+
+    // const popup16 = new mapboxgl.Popup({ offset: 25 }).setText(
+	// 	'突き当り 右'
+	// );
+	// const el16 = document.createElement('div');
+	// el16.id = 'marker-T-right';
+	// new mapboxgl.Marker(el16)
+	// .setLngLat(tsukiatari)
+	// .setPopup(popup16)
+	// .addTo(map);
+
+    // const popup17 = new mapboxgl.Popup({ offset: 25 }).setText(
+	// 	'セブンイレブン'
+	// );
+	// const el17 = document.createElement('div');
+	// el17.id = 'marker-convenience-store';
+	// new mapboxgl.Marker(el17)
+	// .setLngLat(seven)
+	// .setPopup(popup17)
+	// .addTo(map);
+
+    // // 忘れ
+    // const popup18 = new mapboxgl.Popup({ offset: 25 }).setText(
+	// 	'鎌倉パスタ'
+	// );
+	// const el18 = document.createElement('div');
+	// el18.id = 'marker-food';
+	// new mapboxgl.Marker(el18)
+	// .setLngLat(kamakurapasta)
+	// .setPopup(popup18)
+	// .addTo(map);
+    
+
 	// マーカー表示＆クリックで飛ぶ
 	// 田町
-	map.on('load', () => {
-		map.addSource('point1', {
-			'type': 'geojson',
-			'data': {
-				'type': 'Feature',
-						'properties': {},
-						'geometry': {
-							'type': 'Point',
-							'coordinates': tamachi
-						}
-			}
-		});
-		// Add a circle layer
-		map.addLayer({
-			'id': 'circle1',
-			'type': 'circle',
-			'source': 'point1',
-			'paint': {
-				'circle-color': '#4264fb',
-				'circle-radius': 10,
-				'circle-stroke-width': 3,
-				'circle-stroke-color': '#ffffff'
-			}
-		});
-		// Center the map on the coordinates of any clicked circle from the 'circle' layer.
-		map.on('click', 'circle1', () => {
-				map.flyTo({
-					center: tamachi,
-					zoom: 18,
-					pitch: 40,
-					bearing: 120
-				});
-		});
-		// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
-		map.on('mouseenter', 'circle1', () => {
-			map.getCanvas().style.cursor = 'pointer';
-		});	
-		// Change it back to a pointer when it leaves.
-		map.on('mouseleave', 'circle1', () => {
-			map.getCanvas().style.cursor = '';
-		});
-	});
+	// map.on('load', () => {
+	// 	map.addSource('point1', {
+	// 		'type': 'geojson',
+	// 		'data': {
+	// 			'type': 'Feature',
+	// 					'properties': {},
+	// 					'geometry': {
+	// 						'type': 'Point',
+	// 						'coordinates': tamachi
+	// 					}
+	// 		}
+	// 	});
+	// 	// Add a circle layer
+	// 	map.addLayer({
+	// 		'id': 'circle1',
+	// 		'type': 'circle',
+	// 		'source': 'point1',
+	// 		'paint': {
+	// 			'circle-color': '#4264fb',
+	// 			'circle-radius': 10,
+	// 			'circle-stroke-width': 3,
+	// 			'circle-stroke-color': '#ffffff'
+	// 		}
+	// 	});
+	// 	// Center the map on the coordinates of any clicked circle from the 'circle' layer.
+	// 	map.on('click', 'circle1', () => {
+	// 			map.flyTo({
+	// 				center: tamachi,
+	// 				zoom: 18,
+	// 				pitch: 40,
+	// 				bearing: 120
+	// 			});
+	// 	});
+	// 	// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
+	// 	map.on('mouseenter', 'circle1', () => {
+	// 		map.getCanvas().style.cursor = 'pointer';
+	// 	});	
+	// 	// Change it back to a pointer when it leaves.
+	// 	map.on('mouseleave', 'circle1', () => {
+	// 		map.getCanvas().style.cursor = '';
+	// 	});
+	// });
 
 	// // 階段
 	// map.on('load', () => {
